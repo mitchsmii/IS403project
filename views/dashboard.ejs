@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard – HabitGarden</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(120deg, #f1f8e9, #c8e6c9);
+      min-height: 100vh;
+    }
+
+    .header {
+      background-color: #4caf50;
+      color: white;
+      padding: 1.5rem;
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .header h2 {
+      font-weight: 600;
+    }
+
+    .main-container {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 1rem;
+    }
+
+    .stats-box {
+      background: white;
+      border-radius: 20px;
+      padding: 1.5rem;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      margin-bottom: 2rem;
+    }
+
+    .stats-box h4 {
+      color: #388e3c;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    .habit-card {
+      background: white;
+      border-radius: 20px;
+      padding: 1.5rem;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+      margin-bottom: 1.5rem;
+    }
+
+    .habit-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #388e3c;
+    }
+
+    .habit-sub {
+      color: #616161;
+      font-size: 0.9rem;
+    }
+
+    .habit-actions a {
+      color: #4caf50;
+      font-weight: 500;
+      text-decoration: none;
+      margin-right: 1rem;
+    }
+
+    .add-btn {
+      display: block;
+      width: 200px;
+      margin: 2rem auto;
+      padding: 0.75rem;
+      text-align: center;
+      background-color: #4caf50;
+      color: white;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.3s ease;
+    }
+
+    .add-btn:hover {
+      background-color: #388e3c;
+    }
+  </style>
+
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="header">
+    <h2>Welcome Back, User 🌱</h2>
+    <a href="/logout" style="color:white;text-decoration:underline;font-size:0.9rem;">Logout</a>
+  </div>
+
+  <div class="main-container">
+
+    <!-- Stats Section -->
+    <div class="stats-box">
+      <h4>Your Progress</h4>
+      <div class="row text-center">
+        <div class="col-md-4">
+          <h3>5</h3>
+          <p>Habits Tracked</p>
+        </div>
+        <div class="col-md-4">
+          <h3>12</h3>
+          <p>Streak Days</p>
+        </div>
+        <div class="col-md-4">
+          <h3>87%</h3>
+          <p>Completion Rate</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Habits List -->
+    <h4 class="mb-3" style="color:#388e3c;font-weight:600;">Your Habits</h4>
+
+    <!-- Habit Card 1 -->
+    <div class="habit-card">
+      <div class="d-flex justify-content-between">
+        <div>
+          <div class="habit-title">Morning Scripture Study</div>
+          <div class="habit-sub">Daily • Spiritual</div>
+        </div>
+        <div class="habit-actions">
+          <a href="/edithabit/1">Edit</a>
+          <a href="/deletehabit/1">Delete</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Habit Card 2 -->
+    <div class="habit-card">
+      <div class="d-flex justify-content-between">
+        <div>
+          <div class="habit-title">Gym Workout</div>
+          <div class="habit-sub">Daily • Health</div>
+        </div>
+        <div class="habit-actions">
+          <a href="/edithabit/2">Edit</a>
+          <a href="/deletehabit/2">Delete</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Habit Card 3 -->
+    <div class="habit-card">
+      <div class="d-flex justify-content-between">
+        <div>
+          <div class="habit-title">Study 1 Hour</div>
+          <div class="habit-sub">Daily • Productivity</div>
+        </div>
+        <div class="habit-actions">
+          <a href="/edithabit/3">Edit</a>
+          <a href="/deletehabit/3">Delete</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add Habit Button -->
+    <a href="/addhabit" class="add-btn">+ Add New Habit</a>
+
+  </div>
+
+</body>
+</html>
