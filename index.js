@@ -18,9 +18,10 @@ const knex = require("knex")({
     user: process.env.RDS_USERNAME || "postgres",
     password: process.env.RDS_PASSWORD || "password", 
     database: process.env.RDS_DB_NAME || "HabitGarden",
-    port: process.env.RDS_PORT || 3000
+    port: process.env.RDS_PORT || 3000,
+    ssl: process.env.RDS_SSL ? { rejectUnauthorized: false } : false,
   }
-})
+});
 
 
 // index
