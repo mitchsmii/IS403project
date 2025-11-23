@@ -105,7 +105,7 @@
       <div class="mb-3">
         <label class="form-label">Frequency</label>
         <select class="form-select" name="frequency">
-          <option>Daily</option>
+          <option>Yearly</option>
           <option>Weekly</option>
           <option>Monthly</option>
         </select>
@@ -114,10 +114,13 @@
       <div class="mb-3">
         <label class="form-label">Category</label>
         <select class="form-select" name="category">
-          <option>Health</option>
-          <option>Spiritual</option>
-          <option>Productivity</option>
-          <option>Personal</option>
+          <% for (let iCount = 0; iCount < categories.length; iCount++) { %>
+
+            <option value="<%= categories[iCount].id %>">
+              <%= categories[iCount].category_name %>
+            </option>
+
+          <% }; %> 
         </select>
       </div>
 

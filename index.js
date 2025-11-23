@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const path = require('path');
+require('dotenv').config();
 const PORT = process.env.PORT || 3000;
 
 app.set('view engine', 'ejs');
@@ -8,7 +9,7 @@ app.set('views', path.join(__dirname, 'views'));
 
 // Serve your "images" directory directly
 app.use('/images', express.static(path.join(__dirname, 'images')));
-
+app.use(express.urlencoded({ extended: true }));
 
 //ADD DATABASE CONNECTION
 const knex = require("knex")({
@@ -16,13 +17,20 @@ const knex = require("knex")({
   connection: {
     host: process.env.RDS_HOSTNAME || "localhost",
     user: process.env.RDS_USERNAME || "postgres",
-    password: process.env.RDS_PASSWORD || "password", 
+    password: process.env.RDS_PASSWORD || "password",
     database: process.env.RDS_DB_NAME || "HabitGarden",
-    port: process.env.RDS_PORT || 3000,
-    ssl: process.env.RDS_SSL ? { rejectUnauthorized: false } : false,
+    port: process.env.RDS_PORT || 5432,
+    ssl: { rejectUnauthorized: false }
+
   }
 });
 
+console.log('SSL config:', knex.client.config.connection.ssl);
+
+
+knex.raw('select 1')
+  .then(() => console.log("DB up"))
+  .catch(err => console.error('DB error', err));
 
 // index
 app.get('/', (req, res) => {
@@ -56,8 +64,17 @@ app.get('/logout', (req, res) => {
 
 // add habit
 app.get('/addhabit', (req, res) => {
-  res.render('addhabit')
+  knex('categories')
+    .select('category_id', 'category_name') // adjust to your real columns
+    .then(categories => {
+      res.render('addhabit', { categories });
+    })
+    .catch(err => {
+      console.error('Failed to load categories', err);
+      res.status(500).send('Could not load categories');
+    });
 });
+
 
 app.post('/addhabit', (req, res) => {
   // add a habit to the database with post
