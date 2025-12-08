@@ -20,9 +20,26 @@
       border-bottom-right-radius: 20px;
       text-align: center;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 2rem;
     }
     .header h2 {
       font-weight: 600;
+      margin: 0;
+    }
+    .header-nav-button { /* Renamed to avoid conflict if header-nav is used for multiple links */
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: 25px;
+      transition: background-color 0.3s ease;
+    }
+
+    .header-nav-button:hover {
+      background-color: #388e3c;
     }
     .main-container {
       max-width: 900px;
@@ -101,8 +118,8 @@
 <body>
 
   <div class="header">
-    <h2>My Garden 🌱</h2>
-    <a href="/dashboard" style="color:white;text-decoration:underline;font-size:0.9rem;">Back to Dashboard</a>
+    <h2>My Garden</h2>
+    <a href="/dashboard" class="header-nav-button">Back to Dashboard</a>
   </div>
 
   <div class="main-container">
@@ -119,8 +136,8 @@
     </div>
 
     <div class="quote-container">
-      <p>"The journey of a thousand miles begins with a single step."</p>
-      <footer>- Lao Tzu</footer>
+      <p>"<%= quote.text %>"</p>
+      <footer>- <%= quote.author %></footer>
     </div>
   </div>
 

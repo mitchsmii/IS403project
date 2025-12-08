@@ -65,7 +65,33 @@ app.get('/garden', (req, res) => {
     { name: 'Intellectual', stage: 3 },
     { name: 'Spiritual', stage: 4 },
   ];
-  res.render('garden', { plants });
+
+  const quotes = [
+    { text: "The journey of a thousand miles begins with a single step.", author: "Lao Tzu" },
+    { text: "Believe you can and you're halfway there.", author: "Theodore Roosevelt" },
+    { text: "It does not matter how slowly you go as long as you do not stop.", author: "Confucius" },
+    { text: "The only way to do great work is to love what you do.", author: "Steve Jobs" },
+    { text: "Success is not final, failure is not fatal: it is the courage to continue that counts.", author: "Winston Churchill" },
+    { text: "The future belongs to those who believe in the beauty of their dreams.", author: "Eleanor Roosevelt" },
+    { text: "Strive not to be a success, but rather to be of value.", author: "Albert Einstein" },
+    { text: "The best way to predict the future is to create it.", author: "Peter Drucker" },
+    { text: "You miss 100% of the shots you don't take.", author: "Wayne Gretzky" },
+    { text: "I have not failed. I've just found 10,000 ways that won't work.", author: "Thomas A. Edison" },
+    { text: "The secret of getting ahead is getting started.", author: "Mark Twain" },
+    { text: "It's not whether you get knocked down, it's whether you get up.", author: "Vince Lombardi" },
+    { text: "The harder I work, the luckier I get.", author: "Gary Player" },
+    { text: "If you want to lift yourself up, lift up someone else.", author: "Booker T. Washington" },
+    { text: "The only limit to our realization of tomorrow will be our doubts of today.", author: "Franklin D. Roosevelt" },
+    { text: "What you get by achieving your goals is not as important as what you become by achieving your goals.", author: "Zig Ziglar" },
+    { text: "Act as if what you do makes a difference. It does.", author: "William James" },
+    { text: "The mind is everything. What you think you become.", author: "Buddha" },
+    { text: "An unexamined life is not worth living.", author: "Socrates" },
+    { text: "The best time to plant a tree was 20 years ago. The second best time is now.", author: "Chinese Proverb" }
+  ];
+
+  const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+
+  res.render('garden', { plants, quote: randomQuote });
 });
 
 app.get('/logout', (req, res) => {
