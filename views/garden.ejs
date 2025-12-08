@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Garden - HabitGarden</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(120deg, #f1f8e9, #c8e6c9);
+      min-height: 100vh;
+    }
+    .header {
+      background-color: #4caf50;
+      color: white;
+      padding: 1.5rem;
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .header h2 {
+      font-weight: 600;
+    }
+    .main-container {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 1rem;
+    }
+    .garden-container {
+      background: white;
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+    .garden-container h4 {
+      color: #388e3c;
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+    }
+    .plant {
+      display: flex;
+      flex-direction: column; /* Stack image and text vertically */
+      align-items: center; /* Center horizontally */
+      justify-content: flex-end; /* Align content to the bottom */
+      margin: 1rem;
+      text-align: center;
+      height: 200px; /* Fixed height for the plant container */
+      width: 150px; /* Fixed width to prevent shifting */
+    }
+    .plant img {
+      transition: transform 0.5s ease;
+      margin-bottom: 5px; /* Small space between plant and label */
+      flex-shrink: 0; /* Prevent image from shrinking */
+    }
+    .plant img:hover {
+      transform: scale(1.1);
+    }
+    .plant p {
+      margin-top: 0; /* Remove default margin-top */
+      font-weight: 500;
+      color: #424242;
+      flex-shrink: 0; /* Prevent text from shrinking */
+    }
+    .stage-1 img {
+      width: 50px;
+      height: 50px;
+    }
+    .stage-2 img {
+      width: 80px;
+      height: 80px;
+    }
+    .stage-3 img {
+      width: 120px;
+      height: 120px;
+    }
+    .stage-4 img {
+      width: 150px;
+      height: 150px;
+    }
+    .quote-container {
+      background: #e8f5e9;
+      border-radius: 15px;
+      padding: 1.5rem;
+      text-align: center;
+      color: #388e3c;
+    }
+    .quote-container p {
+      font-style: italic;
+      margin-bottom: 0.5rem;
+    }
+    .quote-container footer {
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <h2>My Garden 🌱</h2>
+    <a href="/dashboard" style="color:white;text-decoration:underline;font-size:0.9rem;">Back to Dashboard</a>
+  </div>
+
+  <div class="main-container">
+    <div class="garden-container">
+      <h4>Your Virtual Garden</h4>
+      <div class="d-flex justify-content-center flex-wrap">
+        <% plants.forEach(plant => { %>
+          <div class="plant stage-<%= plant.stage %>">
+            <img src="/images/plant.png" alt="Plant">
+            <p><%= plant.name %></p>
+          </div>
+        <% }); %>
+      </div>
+    </div>
+
+    <div class="quote-container">
+      <p>"The journey of a thousand miles begins with a single step."</p>
+      <footer>- Lao Tzu</footer>
+    </div>
+  </div>
+
+</body>
+</html>

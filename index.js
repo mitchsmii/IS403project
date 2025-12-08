@@ -57,6 +57,17 @@ app.get('/dashboard', (req, res) => {
   res.render('dashboard')
 });
 
+// garden
+app.get('/garden', (req, res) => {
+  const plants = [
+    { name: 'Physical', stage: 1 },
+    { name: 'Social', stage: 2 },
+    { name: 'Intellectual', stage: 3 },
+    { name: 'Spiritual', stage: 4 },
+  ];
+  res.render('garden', { plants });
+});
+
 app.get('/logout', (req, res) => {
   // CHANGE THIS FOR LOGOUT LOGIC
   res.render('index')
