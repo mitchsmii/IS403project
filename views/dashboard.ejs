@@ -9,88 +9,460 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(120deg, #f1f8e9, #c8e6c9);
+      font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 50%, #bbf7d0 100%);
       min-height: 100vh;
+      padding-bottom: 3rem;
     }
 
     .header {
-      background-color: #4caf50;
+      background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
       color: white;
-      padding: 1.5rem;
-      border-bottom-left-radius: 20px;
-      border-bottom-right-radius: 20px;
-      text-align: center;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      padding: 2rem 2rem 2.5rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+      opacity: 0.3;
+    }
+
+    .header-content {
+      position: relative;
+      z-index: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
     }
 
     .header h2 {
       font-weight: 600;
+      font-size: 1.75rem;
+      letter-spacing: -0.5px;
+    }
+
+    .header-nav {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .header-nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+    }
+
+    .header-nav a:hover {
+      background: rgba(255,255,255,0.2);
+      transform: translateY(-2px);
     }
 
     .main-container {
-      max-width: 900px;
-      margin: 2rem auto;
-      padding: 1rem;
+      max-width: 1200px;
+      margin: -2rem auto 0;
+      padding: 0 1.5rem;
+      position: relative;
+      z-index: 2;
     }
 
-    .stats-box {
+    .alert {
+      padding: 1rem 1.25rem;
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+      font-weight: 500;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      animation: slideDown 0.3s ease;
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .alert-success {
+      background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+      color: white;
+      border: none;
+    }
+
+    .alert-danger {
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      color: white;
+      border: none;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .stat-card {
       background: white;
-      border-radius: 20px;
-      padding: 1.5rem;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-      margin-bottom: 2rem;
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
     }
 
-    .stats-box h4 {
-      color: #388e3c;
-      margin-bottom: 1rem;
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #22c55e 0%, #16a34a 100%);
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+    }
+
+    .stat-card h3 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-card p {
+      color: #64748b;
+      font-size: 0.95rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .section-title {
+      color: white;
       font-weight: 600;
+      font-size: 1.5rem;
+      margin-bottom: 0;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .section-title::before {
+      content: '';
+      width: 4px;
+      height: 24px;
+      background: white;
+      border-radius: 2px;
+    }
+
+    .habits-grid {
+      display: grid;
+      gap: 1.5rem;
     }
 
     .habit-card {
       background: white;
-      border-radius: 20px;
-      padding: 1.5rem;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.08);
-      margin-bottom: 1.5rem;
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      border-left: 4px solid transparent;
+      position: relative;
+    }
+
+    .habit-card:hover {
+      transform: translateX(5px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+      border-left-color: #22c55e;
+    }
+
+    .habit-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+      gap: 1.5rem;
+    }
+
+    .habit-info {
+      flex: 1;
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+    }
+
+    .plant-image-container {
+      flex-shrink: 0;
+      width: 80px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+      border-radius: 12px;
+      padding: 0.5rem;
+    }
+
+    .plant-image {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transition: all 0.3s ease;
+    }
+
+    .plant-seedling {
+      width: 50px;
+      height: 50px;
+    }
+
+    .plant-young {
+      width: 60px;
+      height: 60px;
+    }
+
+    .plant-mature {
+      width: 70px;
+      height: 70px;
+    }
+
+    .plant-fullygrown {
+      width: 80px;
+      height: 80px;
+    }
+
+    .habit-content {
+      flex: 1;
     }
 
     .habit-title {
-      font-size: 1.2rem;
+      font-size: 1.4rem;
       font-weight: 600;
-      color: #388e3c;
+      color: #1e293b;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.3px;
     }
 
-    .habit-sub {
-      color: #616161;
+    .habit-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .habit-tag {
+      display: inline-block;
+      padding: 0.35rem 0.75rem;
+      background: #f1f5f9;
+      color: #64748b;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    .habit-tag.category {
+      background: linear-gradient(135deg, #22c55e15 0%, #16a34a15 100%);
+      color: #16a34a;
+    }
+
+    .habit-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      color: #64748b;
       font-size: 0.9rem;
     }
 
-    .habit-actions a {
-      color: #4caf50;
-      font-weight: 500;
+    .stat-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .stat-item strong {
+      color: #1e293b;
+      font-weight: 600;
+    }
+
+    .time-warning {
+      color: #f59e0b;
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .habit-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      align-items: flex-end;
+    }
+
+    .btn-complete {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+      min-width: 120px;
+    }
+
+    .btn-complete:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+    }
+
+    .btn-complete:disabled {
+      background: #e2e8f0;
+      color: #94a3b8;
+      cursor: not-allowed;
+      box-shadow: none;
+      transform: none;
+    }
+
+    .action-links {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .action-links a {
+      color: #64748b;
       text-decoration: none;
-      margin-right: 1rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      padding: 0.25rem 0.5rem;
+    }
+
+    .action-links a:hover {
+      color: #22c55e;
+      transform: translateX(2px);
+    }
+
+    .empty-state {
+      background: white;
+      border-radius: 16px;
+      padding: 4rem 2rem;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    .empty-state p {
+      color: #64748b;
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
     }
 
     .add-btn {
-      display: block;
-      width: 200px;
-      margin: 2rem auto;
-      padding: 0.75rem;
-      text-align: center;
-      background-color: #4caf50;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      width: 100%;
+      max-width: 300px;
+      margin: 2.5rem auto 0;
+      padding: 1rem 2rem;
+      background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
       color: white;
-      border-radius: 50px;
+      border-radius: 12px;
       text-decoration: none;
       font-weight: 600;
-      transition: 0.3s ease;
+      font-size: 1.05rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 30px rgba(34, 197, 94, 0.3);
     }
 
     .add-btn:hover {
-      background-color: #388e3c;
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(34, 197, 94, 0.4);
+    }
+
+    .add-btn::before {
+      content: '+';
+      font-size: 1.5rem;
+      font-weight: 300;
+    }
+
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .main-container {
+        padding: 0 1rem;
+      }
+
+      .habit-card-header {
+        flex-direction: column;
+      }
+
+      .habit-info {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .plant-image-container {
+        width: 100px;
+        height: 100px;
+      }
+
+      .habit-content {
+        width: 100%;
+      }
+
+      .habit-actions {
+        width: 100%;
+        align-items: stretch;
+      }
+
+      .btn-complete {
+        width: 100%;
+      }
     }
   </style>
 
@@ -99,78 +471,167 @@
 
   <!-- Header -->
   <div class="header">
-    <h2>Welcome Back, User 🌱</h2>
-    <a href="/logout" style="color:white;text-decoration:underline;font-size:0.9rem;">Logout</a>
+    <div class="header-content">
+      <h2>Welcome Back, <%= user.firstname || user.username %> 🌱</h2>
+      <div class="header-nav">
+        <a href="/profile?userid=<%= user.userid %>">Profile</a>
+        <a href="/logout">Logout</a>
+      </div>
+    </div>
   </div>
 
   <div class="main-container">
 
+    <!-- Success/Error Messages -->
+    <% if (typeof success !== 'undefined' && success) { %>
+      <div class="alert alert-success" role="alert">
+        <%= success %>
+      </div>
+    <% } %>
+    <% if (typeof error !== 'undefined' && error) { %>
+      <div class="alert alert-danger" role="alert">
+        <%= error %>
+      </div>
+    <% } %>
+
     <!-- Stats Section -->
-    <div class="stats-box">
-      <h4>Your Progress</h4>
-      <div class="row text-center">
-        <div class="col-md-4">
-          <h3>5</h3>
-          <p>Habits Tracked</p>
-        </div>
-        <div class="col-md-4">
-          <h3>12</h3>
-          <p>Streak Days</p>
-        </div>
-        <div class="col-md-4">
-          <h3>87%</h3>
-          <p>Completion Rate</p>
-        </div>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <h3><%= stats.totalHabits %></h3>
+        <p>Habits Tracked</p>
+      </div>
+      <div class="stat-card">
+        <h3><%= stats.totalStreak %></h3>
+        <p>Total Streak Days</p>
+      </div>
+      <div class="stat-card">
+        <h3><%= stats.completionRate %>%</h3>
+        <p>Completion Rate</p>
       </div>
     </div>
 
     <!-- Habits List -->
-    <h4 class="mb-3" style="color:#388e3c;font-weight:600;">Your Habits</h4>
-
-    <!-- Habit Card 1 -->
-    <div class="habit-card">
-      <div class="d-flex justify-content-between">
-        <div>
-          <div class="habit-title">Morning Scripture Study</div>
-          <div class="habit-sub">Daily • Spiritual</div>
-        </div>
-        <div class="habit-actions">
-          <a href="/edithabit/1">Edit</a>
-          <a href="/deletehabit/1">Delete</a>
-        </div>
-      </div>
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+      <h2 class="section-title" style="margin: 0;">Your Habits</h2>
+      <form action="/dashboard" method="GET" style="display: flex; gap: 0.5rem; flex: 1; max-width: 400px; min-width: 200px;">
+        <input type="hidden" name="userid" value="<%= user.userid %>">
+        <input 
+          type="text" 
+          name="search" 
+          placeholder="Search habits..." 
+          value="<%= typeof searchQuery !== 'undefined' ? searchQuery : '' %>"
+          style="flex: 1; padding: 0.75rem 1rem; border: 2px solid #e2e8f0; border-radius: 12px; font-size: 0.95rem; transition: all 0.3s ease;"
+          onfocus="this.style.borderColor='#22c55e'; this.style.boxShadow='0 0 0 3px rgba(34, 197, 94, 0.1)'"
+          onblur="this.style.borderColor='#e2e8f0'; this.style.boxShadow='none'"
+        >
+        <button 
+          type="submit" 
+          style="padding: 0.75rem 1.5rem; background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); color: white; border: none; border-radius: 12px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);"
+          onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(34, 197, 94, 0.4)'"
+          onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(34, 197, 94, 0.3)'"
+        >
+          Search
+        </button>
+        <% if (typeof searchQuery !== 'undefined' && searchQuery) { %>
+          <a href="/dashboard?userid=<%= user.userid %>" style="padding: 0.75rem 1rem; background: #e2e8f0; color: #64748b; border-radius: 12px; text-decoration: none; font-weight: 500; display: flex; align-items: center; transition: all 0.3s ease;" title="Clear search">
+            ✕
+          </a>
+        <% } %>
+      </form>
     </div>
 
-    <!-- Habit Card 2 -->
-    <div class="habit-card">
-      <div class="d-flex justify-content-between">
-        <div>
-          <div class="habit-title">Gym Workout</div>
-          <div class="habit-sub">Daily • Health</div>
-        </div>
-        <div class="habit-actions">
-          <a href="/edithabit/2">Edit</a>
-          <a href="/deletehabit/2">Delete</a>
-        </div>
+    <% if (habits.length === 0) { %>
+      <div class="empty-state">
+        <p>No habits yet. Start your journey by adding your first habit!</p>
+        <a href="/addhabit?userid=<%= user.userid %>" class="add-btn">Add New Habit</a>
       </div>
-    </div>
-
-    <!-- Habit Card 3 -->
-    <div class="habit-card">
-      <div class="d-flex justify-content-between">
-        <div>
-          <div class="habit-title">Study 1 Hour</div>
-          <div class="habit-sub">Daily • Productivity</div>
-        </div>
-        <div class="habit-actions">
-          <a href="/edithabit/3">Edit</a>
-          <a href="/deletehabit/3">Delete</a>
-        </div>
+    <% } else { %>
+      <div class="habits-grid">
+        <% habits.forEach(function(habit) { %>
+          <div class="habit-card">
+            <div class="habit-card-header">
+              <div class="habit-info">
+                <div class="plant-image-container">
+                  <% 
+                    // Determine image based on category
+                    let plantImage = '/images/plant.png';
+                    const categoryLower = (habit.category || '').toLowerCase();
+                    if (categoryLower === 'intellectual') {
+                      plantImage = '/images/plant.png';
+                    } else if (categoryLower === 'physical') {
+                      plantImage = '/images/redplant.png';
+                    } else if (categoryLower === 'spiritual') {
+                      plantImage = '/images/whiteplant.png';
+                    } else if (categoryLower === 'social') {
+                      plantImage = '/images/yellowplant.png';
+                    }
+                    
+                    // Determine size based on growth level
+                    let plantSize = '50px';
+                    if (habit.growthlevel_id === 2) {
+                      plantSize = '60px';
+                    } else if (habit.growthlevel_id === 3) {
+                      plantSize = '70px';
+                    } else if (habit.growthlevel_id === 4) {
+                      plantSize = '80px';
+                    }
+                  %>
+                  <img 
+                    src="<%= plantImage %>" 
+                    alt="<%= habit.category %> <%= habit.growthLevel %> plant" 
+                    class="plant-image plant-<%= habit.growthLevel.toLowerCase().replace(' ', '') %>"
+                    style="width: <%= plantSize %>; height: <%= plantSize %>;"
+                  >
+                </div>
+                <div class="habit-content">
+                  <div class="habit-title"><%= habit.habitname %></div>
+                  <div class="habit-meta">
+                    <span class="habit-tag"><%= habit.habitfrequency %></span>
+                    <span class="habit-tag category"><%= habit.category %></span>
+                    <span class="habit-tag"><%= habit.growthLevel %></span>
+                  </div>
+                  <div class="habit-stats">
+                    <div class="stat-item">
+                      <span>🔥 Streak:</span>
+                      <strong><%= habit.habitstreak || 0 %> days</strong>
+                    </div>
+                    <% if (habit.latestcompletion) { %>
+                      <div class="stat-item">
+                        <span>✓ Last:</span>
+                        <strong><%= new Date(habit.latestcompletion).toLocaleDateString() %></strong>
+                      </div>
+                    <% } %>
+                  </div>
+                  <% if (!habit.canComplete && habit.timeUntilNext) { %>
+                    <div class="time-warning">
+                      ⏰ Next completion in: <%= habit.timeUntilNext %>
+                    </div>
+                  <% } %>
+                </div>
+              </div>
+              <div class="habit-actions">
+                <form action="/completehabit" method="POST" style="margin: 0;">
+                  <input type="hidden" name="habitid" value="<%= habit.habitid %>">
+                  <input type="hidden" name="userid" value="<%= user.userid %>">
+                  <% if (habit.canComplete) { %>
+                    <button type="submit" class="btn-complete">✓ Complete</button>
+                  <% } else { %>
+                    <button type="button" class="btn-complete" disabled title="Already completed. Check time until next completion.">✓ Completed</button>
+                  <% } %>
+                </form>
+                <div class="action-links">
+                  <a href="/edithabit/<%= habit.habitid %>?userid=<%= user.userid %>">Edit</a>
+                  <a href="/deletehabit/<%= habit.habitid %>?userid=<%= user.userid %>" onclick="return confirm('Are you sure you want to delete this habit?')">Delete</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% }); %>
       </div>
-    </div>
 
-    <!-- Add Habit Button -->
-    <a href="/addhabit" class="add-btn">+ Add New Habit</a>
+      <!-- Add Habit Button -->
+      <a href="/addhabit?userid=<%= user.userid %>" class="add-btn">Add New Habit</a>
+    <% } %>
 
   </div>
 

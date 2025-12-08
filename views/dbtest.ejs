@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Database Connection Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 10px;
+        }
+        .status {
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+        .status.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .status.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .info-box {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            border-left: 4px solid #007bff;
+        }
+        .info-box h3 {
+            margin-top: 0;
+            color: #007bff;
+        }
+        .info-item {
+            margin: 8px 0;
+            padding: 5px 0;
+        }
+        .label {
+            font-weight: bold;
+            color: #555;
+        }
+        .value {
+            color: #333;
+            font-family: monospace;
+        }
+        .error-details {
+            background-color: #fff3cd;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            border-left: 4px solid #ffc107;
+            font-family: monospace;
+            color: #856404;
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            color: #007bff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Database Connection Test</h1>
+        
+        <div class="status <%= status %>">
+            <%= message %>
+        </div>
+
+        <div class="info-box">
+            <h3>Connection Configuration</h3>
+            <div class="info-item">
+                <span class="label">Host:</span>
+                <span class="value"><%= connectionInfo.host %></span>
+            </div>
+            <div class="info-item">
+                <span class="label">Database:</span>
+                <span class="value"><%= connectionInfo.database %></span>
+            </div>
+            <div class="info-item">
+                <span class="label">User:</span>
+                <span class="value"><%= connectionInfo.user %></span>
+            </div>
+            <div class="info-item">
+                <span class="label">Port:</span>
+                <span class="value"><%= connectionInfo.port %></span>
+            </div>
+            <div class="info-item">
+                <span class="label">SSL:</span>
+                <span class="value"><%= connectionInfo.ssl %></span>
+            </div>
+        </div>
+
+        <% if (status === 'success' && dbInfo) { %>
+            <div class="info-box">
+                <h3>Database Information</h3>
+                <div class="info-item">
+                    <span class="label">PostgreSQL Version:</span>
+                    <span class="value"><%= dbInfo.version %></span>
+                </div>
+                <div class="info-item">
+                    <span class="label">Current Database:</span>
+                    <span class="value"><%= dbInfo.current_database %></span>
+                </div>
+                <div class="info-item">
+                    <span class="label">Current User:</span>
+                    <span class="value"><%= dbInfo.current_user %></span>
+                </div>
+                <div class="info-item">
+                    <span class="label">Server Time:</span>
+                    <span class="value"><%= dbInfo.now %></span>
+                </div>
+            </div>
+        <% } %>
+
+        <% if (status === 'error' && error) { %>
+            <div class="error-details">
+                <strong>Error Details:</strong><br>
+                <span class="label">Error Code:</span> <span class="value"><%= errorCode || 'N/A' %></span><br><br>
+                <span class="label">Message:</span><br>
+                <%= error %>
+            </div>
+        <% } %>
+
+        <% if (status === 'error' && troubleshooting) { %>
+            <div class="info-box" style="border-left-color: #ff9800;">
+                <h3 style="color: #ff9800;">Troubleshooting Tips</h3>
+                <pre style="white-space: pre-wrap; margin: 0; font-family: Arial, sans-serif;"><%= troubleshooting %></pre>
+            </div>
+        <% } %>
+
+        <a href="/">← Back to Home</a>
+    </div>
+</body>
+</html>

@@ -13,78 +13,119 @@
 
   <!-- Custom CSS -->
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #e8f5e9, #f1f8e9);
+      font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 50%, #bbf7d0 100%);
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
-      color: #2e7d32;
+      padding: 2rem;
     }
 
     .hero-container {
       background: white;
       border-radius: 24px;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
       padding: 4rem 3rem;
       max-width: 600px;
-      width: 90%;
-      transition: transform 0.3s ease;
+      width: 100%;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #22c55e 0%, #16a34a 100%);
     }
 
     .hero-container:hover {
-      transform: scale(1.02);
+      transform: translateY(-5px);
+      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.15);
     }
 
     h1 {
       font-weight: 700;
-      color: #388e3c;
+      font-size: 2.5rem;
+      background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1rem;
+      letter-spacing: -1px;
     }
 
     p {
-      color: #424242;
-      margin-bottom: 2rem;
+      color: #64748b;
+      margin-bottom: 2.5rem;
+      font-size: 1.1rem;
+      line-height: 1.6;
     }
 
     .btn-custom {
-      padding: 0.8rem 2rem;
-      border-radius: 50px;
-      font-weight: 500;
+      padding: 0.9rem 2.5rem;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 1rem;
       transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
     }
 
     .btn-login {
-      background-color: #4caf50;
+      background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
       color: white;
       border: none;
+      box-shadow: 0 10px 30px rgba(34, 197, 94, 0.3);
     }
 
     .btn-login:hover {
-      background-color: #388e3c;
-      box-shadow: 0 4px 10px rgba(72, 187, 120, 0.3);
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(34, 197, 94, 0.4);
     }
 
     .btn-signup {
-      background-color: white;
-      border: 2px solid #4caf50;
-      color: #4caf50;
+      background: white;
+      border: 2px solid #22c55e;
+      color: #16a34a;
     }
 
     .btn-signup:hover {
-      background-color: #e8f5e9;
+      background: #f0fdf4;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(34, 197, 94, 0.2);
     }
 
     .illustration {
-      width: 120px;
+      width: 140px;
       margin-bottom: 1.5rem;
       animation: float 3s ease-in-out infinite;
+      filter: drop-shadow(0 10px 20px rgba(34, 197, 94, 0.2));
     }
 
     @keyframes float {
       0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
+      50% { transform: translateY(-15px); }
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
     }
   </style>
 </head>
@@ -95,9 +136,9 @@
     <h1>Grow Together 🌿</h1>
     <p>Plant small habits. Grow a beautiful life.<br>Start nurturing your personal garden of growth today.</p>
 
-    <div class="d-flex justify-content-center gap-3">
-      <a href="/login" class="btn btn-custom btn-login">Login</a>
-      <a href="/signup" class="btn btn-custom btn-signup">Sign Up</a>
+    <div class="btn-group">
+      <a href="/login" class="btn-custom btn-login">Login</a>
+      <a href="/signup" class="btn-custom btn-signup">Sign Up</a>
     </div>
   </div>
 </body>
