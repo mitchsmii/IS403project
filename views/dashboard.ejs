@@ -146,50 +146,35 @@
       </div>
     </div>
 
+    <!-- Search Bar -->
+    <form action="/dashboard/search" method="GET" class="mb-4">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search for a habit..." name="query">
+        <button class="btn btn-outline-secondary" type="submit">Search</button>
+      </div>
+    </form>
+
     <!-- Habits List -->
     <h4 class="mb-3" style="color:#388e3c;font-weight:600;">Your Habits</h4>
 
-    <!-- Habit Card 1 -->
-    <div class="habit-card">
-      <div class="d-flex justify-content-between">
-        <div>
-          <div class="habit-title">Morning Scripture Study</div>
-          <div class="habit-sub">Daily • Spiritual</div>
+    <% if (habits && habits.length > 0) { %>
+      <% habits.forEach(habit => { %>
+        <div class="habit-card">
+          <div class="d-flex justify-content-between">
+            <div>
+              <div class="habit-title"><%= habit.habit_title %></div>
+              <div class="habit-sub"><%= habit.habit_sub %></div>
+            </div>
+            <div class="habit-actions">
+              <a href="/edithabit/<%= habit.id %>">Edit</a>
+              <a href="/deletehabit/<%= habit.id %>">Delete</a>
+            </div>
+          </div>
         </div>
-        <div class="habit-actions">
-          <a href="/edithabit/1">Edit</a>
-          <a href="/deletehabit/1">Delete</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Habit Card 2 -->
-    <div class="habit-card">
-      <div class="d-flex justify-content-between">
-        <div>
-          <div class="habit-title">Gym Workout</div>
-          <div class="habit-sub">Daily • Health</div>
-        </div>
-        <div class="habit-actions">
-          <a href="/edithabit/2">Edit</a>
-          <a href="/deletehabit/2">Delete</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Habit Card 3 -->
-    <div class="habit-card">
-      <div class="d-flex justify-content-between">
-        <div>
-          <div class="habit-title">Study 1 Hour</div>
-          <div class="habit-sub">Daily • Productivity</div>
-        </div>
-        <div class="habit-actions">
-          <a href="/edithabit/3">Edit</a>
-          <a href="/deletehabit/3">Delete</a>
-        </div>
-      </div>
-    </div>
+      <% }); %>
+    <% } else { %>
+      <p>No habits found. Try a different search or <a href="/addhabit">add a new habit</a>.</p>
+    <% } %>
 
     <!-- Add Habit Button -->
     <a href="/addhabit" class="add-btn">+ Add New Habit</a>

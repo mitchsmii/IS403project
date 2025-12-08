@@ -54,7 +54,27 @@ app.post('/signup', (req, res) => {
 
 // dashboard
 app.get('/dashboard', (req, res) => {
-  res.render('dashboard')
+  // In the future, you will fetch this from the database
+  const habits = [
+    { id: 1, habit_title: 'Morning Scripture Study', habit_sub: 'Daily • Spiritual' },
+    { id: 2, habit_title: 'Gym Workout', habit_sub: 'Daily • Health' },
+    { id: 3, habit_title: 'Study 1 Hour', habit_sub: 'Daily • Productivity' }
+  ];
+  res.render('dashboard', { habits });
+});
+
+app.get('/dashboard/search', (req, res) => {
+  const query = req.query.query;
+  // In the future, you will fetch this from the database
+  const allHabits = [
+    { id: 1, habit_title: 'Morning Scripture Study', habit_sub: 'Daily • Spiritual' },
+    { id: 2, habit_title: 'Gym Workout', habit_sub: 'Daily • Health' },
+    { id: 3, habit_title: 'Study 1 Hour', habit_sub: 'Daily • Productivity' }
+  ];
+  const filteredHabits = allHabits.filter(habit => 
+    habit.habit_title.toLowerCase().includes(query.toLowerCase())
+  );
+  res.render('dashboard', { habits: filteredHabits });
 });
 
 // garden
